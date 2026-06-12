@@ -275,10 +275,10 @@ textarea:focus{outline:none;border-color:var(--teal);}
 <div id="home" class="page active">
   <p class="sec-label" style="margin-top:.5rem;">旅のハイライト</p>
   <div class="hi-grid">
-    <div class="hi-card teal"><div class="hi-icon">🚃</div><div class="hi-label">観光列車 2本</div><div class="hi-sub">夜明けのものがたり<br>アンパンマントロッコ</div></div>
+    <div class="hi-card teal"><div class="hi-icon">🚃</div><div class="hi-label">観光列車</div><div class="hi-sub">アンパンマントロッコ<br>特急南風・特急しまんと</div></div>
     <div class="hi-card indigo"><div class="hi-icon">🏊</div><div class="hi-label">プール 1日</div><div class="hi-sub">レオマウォーターランド<br>スライダー・流れるプール</div></div>
     <div class="hi-card amber"><div class="hi-icon">💧</div><div class="hi-label">清流 仁淀川</div><div class="hi-sub">波川公園で水遊び<br>日本最後の清流</div></div>
-    <div class="hi-card coral"><div class="hi-icon">🏨</div><div class="hi-label">ホテル 3泊</div><div class="hi-sub">全泊夕食ビュッフェ<br>天然温泉あり</div></div>
+    <div class="hi-card coral"><div class="hi-icon">🏨</div><div class="hi-label">ホテル 3泊</div><div class="hi-sub">2・3泊目は夕食ビュッフェ<br>1泊目はAirbnb一棟貸し</div></div>
   </div>
   <div class="footer">🏯 坂本龍馬の故郷・四国へ、行ってらっしゃい！</div>
 </div>
@@ -286,21 +286,79 @@ textarea:focus{outline:none;border-color:var(--teal);}
 <!-- 日程 -->
 <div id="schedule" class="page">
   <p class="sec-label">旅のスケジュール</p>
+  <style>
+  .tl{display:flex;flex-direction:column;gap:0;}
+  .tl-row{display:flex;gap:10px;align-items:flex-start;padding:6px 0;}
+  .tl-time{font-size:11px;color:var(--ink3);min-width:42px;padding-top:2px;text-align:right;flex-shrink:0;}
+  .tl-dot-wrap{display:flex;flex-direction:column;align-items:center;flex-shrink:0;}
+  .tl-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:3px;}
+  .tl-line{width:2px;flex:1;min-height:12px;}
+  .tl-content{font-size:13px;color:var(--ink);line-height:1.4;padding-bottom:4px;}
+  .tl-badge{display:inline-block;font-size:10px;padding:2px 7px;border-radius:10px;margin-left:6px;vertical-align:middle;font-weight:600;}
+  .dot-train{background:var(--teal);}
+  .dot-hotel{background:var(--indigo);}
+  .dot-sight{background:#aaa;}
+  .dot-pool{background:#378ADD;}
+  .line-teal{background:var(--teal-light);}
+  .line-grey{background:#e8e8e8;}
+  </style>
+
+  <!-- 1日目 -->
   <div class="day-card">
     <div class="day-head"><div class="day-num d1">1日目</div><div><div class="day-title">高知・仁淀川の清流へ</div><div class="day-date">7月19日（日）</div></div></div>
-    <div class="tags"><span class="tag">🚄 新幹線で岡山</span><span class="tag">🚃 特急南風で高知</span><span class="tag">💧 波川公園で水遊び</span><span class="tag">🏠 三井家（Airbnb）泊</span></div>
+    <div class="tl">
+      <div class="tl-row"><span class="tl-time">06:00</span><div class="tl-dot-wrap"><div class="tl-dot dot-train"></div><div class="tl-line line-grey"></div></div><div class="tl-content">埼玉出発・新幹線で岡山へ</div></div>
+      <div class="tl-row"><span class="tl-time">09:30</span><div class="tl-dot-wrap"><div class="tl-dot dot-train"></div><div class="tl-line line-grey"></div></div><div class="tl-content">岡山着・特急南風に乗り換え</div></div>
+      <div class="tl-row"><span class="tl-time">10:05</span><div class="tl-dot-wrap"><div class="tl-dot dot-train"></div><div class="tl-line line-grey"></div></div><div class="tl-content">🚃 特急南風 岡山→高知<span class="tl-badge" style="background:var(--teal-light);color:var(--teal);">約2時間30分</span></div></div>
+      <div class="tl-row"><span class="tl-time">12:30</span><div class="tl-dot-wrap"><div class="tl-dot dot-sight"></div><div class="tl-line line-grey"></div></div><div class="tl-content">高知着・昼食（かつおのたたき）</div></div>
+      <div class="tl-row"><span class="tl-time">14:00</span><div class="tl-dot-wrap"><div class="tl-dot dot-sight"></div><div class="tl-line line-grey"></div></div><div class="tl-content">💧 波川公園（仁淀川）で清流遊び</div></div>
+      <div class="tl-row"><span class="tl-time">16:00</span><div class="tl-dot-wrap"><div class="tl-dot dot-sight"></div><div class="tl-line line-grey"></div></div><div class="tl-content">🚕 タクシーで三井家へ（約15分）</div></div>
+      <div class="tl-row"><span class="tl-time">16:15</span><div class="tl-dot-wrap"><div class="tl-dot dot-hotel"></div></div><div class="tl-content">🏠 Airbnb 三井家 チェックイン<span class="tl-badge" style="background:var(--indigo-light);color:var(--indigo);">一棟貸し</span></div></div>
+    </div>
   </div>
+
+  <!-- 2日目 -->
   <div class="day-card">
-    <div class="day-head"><div class="day-num d2">2日目</div><div><div class="day-title">夜明けのものがたり乗車！</div><div class="day-date">7月20日（月）</div></div></div>
-    <div class="tags"><span class="tag">🚕 朝倉駅→高知駅</span><span class="tag">🌅 グリーン車で高知→窪川</span><span class="tag">🚃 特急で高松へ</span><span class="tag">🏔️ 休暇村讃岐五色台泊</span></div>
+    <div class="day-head"><div class="day-num d2">2日目</div><div><div class="day-title">休暇村讃岐五色台へ！のんびりリゾート</div><div class="day-date">7月20日（月）</div></div></div>
+    <div class="tl">
+      <div class="tl-row"><span class="tl-time">07:30</span><div class="tl-dot-wrap"><div class="tl-dot dot-sight"></div><div class="tl-line line-grey"></div></div><div class="tl-content">朝食・準備</div></div>
+      <div class="tl-row"><span class="tl-time">09:30</span><div class="tl-dot-wrap"><div class="tl-dot dot-train"></div><div class="tl-line line-grey"></div></div><div class="tl-content">🚕 タクシーで朝倉駅へ（約15分）</div></div>
+      <div class="tl-row"><span class="tl-time">09:50</span><div class="tl-dot-wrap"><div class="tl-dot dot-train"></div><div class="tl-line line-grey"></div></div><div class="tl-content">🚃 朝倉駅→高知駅（約10分）</div></div>
+      <div class="tl-row"><span class="tl-time">10:13</span><div class="tl-dot-wrap"><div class="tl-dot dot-train"></div><div class="tl-line line-grey"></div></div><div class="tl-content">🚃 特急しまんと 高知→多度津<span class="tl-badge" style="background:var(--teal-light);color:var(--teal);">約1時間30分</span></div></div>
+      <div class="tl-row"><span class="tl-time">11:43</span><div class="tl-dot-wrap"><div class="tl-dot dot-train"></div><div class="tl-line line-grey"></div></div><div class="tl-content">🚃 多度津着・普通列車に乗り換え</div></div>
+      <div class="tl-row"><span class="tl-time">12:10</span><div class="tl-dot-wrap"><div class="tl-dot dot-train"></div><div class="tl-line line-grey"></div></div><div class="tl-content">🚃 鬼無駅着</div></div>
+      <div class="tl-row"><span class="tl-time">12:20</span><div class="tl-dot-wrap"><div class="tl-dot dot-train"></div><div class="tl-line line-grey"></div></div><div class="tl-content">🚕 タクシーで休暇村讃岐五色台へ（約10分）</div></div>
+      <div class="tl-row"><span class="tl-time">12:30</span><div class="tl-dot-wrap"><div class="tl-dot dot-hotel"></div><div class="tl-line line-grey"></div></div><div class="tl-content">🏔️ 休暇村讃岐五色台 チェックイン<span class="tl-badge" style="background:var(--indigo-light);color:var(--indigo);">夕食ビュッフェ</span></div></div>
+      <div class="tl-row"><span class="tl-time">13:00</span><div class="tl-dot-wrap"><div class="tl-dot dot-pool"></div><div class="tl-line line-grey"></div></div><div class="tl-content">🏊 屋外プール（瀬戸大橋ビュー！）＋幼児プール<span class="tl-badge" style="background:#E6F1FB;color:#0C447C;">宿泊者無料</span></div></div>
+      <div class="tl-row"><span class="tl-time">15:30</span><div class="tl-dot-wrap"><div class="tl-dot dot-sight"></div><div class="tl-line line-grey"></div></div><div class="tl-content">♨️ 展望大浴場でリラックス・夕日と瀬戸大橋の景色を満喫</div></div>
+      <div class="tl-row"><span class="tl-time">18:30</span><div class="tl-dot-wrap"><div class="tl-dot dot-hotel"></div></div><div class="tl-content">🍽️ 夕食ビュッフェ</div></div>
+    </div>
   </div>
+
+  <!-- 3日目 -->
   <div class="day-card">
     <div class="day-head"><div class="day-num d3">3日目</div><div><div class="day-title">レオマで1日プール！</div><div class="day-date">7月21日（火）</div></div></div>
-    <div class="tags"><span class="tag">🍜 朝うどんビュッフェ</span><span class="tag">🌊 流れるプール</span><span class="tag">🎢 スライダー</span><span class="tag">♨️ 森の湯（天然温泉）泊</span></div>
+    <div class="tl">
+      <div class="tl-row"><span class="tl-time">07:00</span><div class="tl-dot-wrap"><div class="tl-dot dot-sight"></div><div class="tl-line line-grey"></div></div><div class="tl-content">朝食（朝うどんビュッフェ）</div></div>
+      <div class="tl-row"><span class="tl-time">09:00</span><div class="tl-dot-wrap"><div class="tl-dot dot-train"></div><div class="tl-line line-grey"></div></div><div class="tl-content">🚌 送迎バスで高松駅→丸亀（電車約20分）</div></div>
+      <div class="tl-row"><span class="tl-time">09:30</span><div class="tl-dot-wrap"><div class="tl-dot dot-pool"></div><div class="tl-line line-grey"></div></div><div class="tl-content">🌊 レオマウォーターランド オープン！</div></div>
+      <div class="tl-row"><span class="tl-time">16:30</span><div class="tl-dot-wrap"><div class="tl-dot dot-pool"></div><div class="tl-line line-grey"></div></div><div class="tl-content">プール終了・徒歩でホテルへ</div></div>
+      <div class="tl-row"><span class="tl-time">17:30</span><div class="tl-dot-wrap"><div class="tl-dot dot-hotel"></div></div><div class="tl-content">♨️ ニューレオマ天然温泉 森の湯 チェックイン<span class="tl-badge" style="background:var(--indigo-light);color:var(--indigo);">夕食ビュッフェ</span></div></div>
+    </div>
   </div>
+
+  <!-- 4日目 -->
   <div class="day-card">
     <div class="day-head"><div class="day-num d4">4日目</div><div><div class="day-title">アンパンマントロッコで帰路！</div><div class="day-date">7月22日（水）</div></div></div>
-    <div class="tags"><span class="tag">🎠 アンパンマンひろば</span><span class="tag">🌉 瀬戸大橋トロッコ</span><span class="tag">🍱 岡山で昼食</span><span class="tag">🚄 新幹線で帰宅</span></div>
+    <div class="tl">
+      <div class="tl-row"><span class="tl-time">07:00</span><div class="tl-dot-wrap"><div class="tl-dot dot-sight"></div><div class="tl-line line-grey"></div></div><div class="tl-content">朝食ビュッフェ</div></div>
+      <div class="tl-row"><span class="tl-time">08:30</span><div class="tl-dot-wrap"><div class="tl-dot dot-train"></div><div class="tl-line line-grey"></div></div><div class="tl-content">🚃 丸亀→高松（電車約20分）</div></div>
+      <div class="tl-row"><span class="tl-time">09:00</span><div class="tl-dot-wrap"><div class="tl-dot dot-sight"></div><div class="tl-line line-grey"></div></div><div class="tl-content">🎠 アンパンマン列車ひろば（高松駅2階）</div></div>
+      <div class="tl-row"><span class="tl-time">10:26</span><div class="tl-dot-wrap"><div class="tl-dot dot-train"></div><div class="tl-line line-grey"></div></div><div class="tl-content">🐟 アンパンマントロッコ 高松→岡山<span class="tl-badge" style="background:var(--teal-light);color:var(--teal);">瀬戸大橋！</span></div></div>
+      <div class="tl-row"><span class="tl-time">11:41</span><div class="tl-dot-wrap"><div class="tl-dot dot-sight"></div><div class="tl-line line-grey"></div></div><div class="tl-content">岡山着・昼食</div></div>
+      <div class="tl-row"><span class="tl-time">13:00</span><div class="tl-dot-wrap"><div class="tl-dot dot-train"></div><div class="tl-line line-grey"></div></div><div class="tl-content">🚄 新幹線で帰路へ</div></div>
+      <div class="tl-row"><span class="tl-time">17:00</span><div class="tl-dot-wrap"><div class="tl-dot dot-sight"></div></div><div class="tl-content">帰宅🎉</div></div>
+    </div>
   </div>
 </div>
 
@@ -310,16 +368,15 @@ textarea:focus{outline:none;border-color:var(--teal);}
   <p style="font-size:12px;color:var(--ink3);margin-bottom:14px;">乗ったらタップしてスタンプを押そう！</p>
   <div class="stamp-grid">
     <div class="stamp-item" onclick="toggleStamp(this)"><span class="stamp-emoji">🚄</span><div class="stamp-name">新幹線<br>埼玉→岡山</div><span class="stamp-badge">未乗車</span></div>
-    <div class="stamp-item" onclick="toggleStamp(this)"><span class="stamp-emoji">🌊</span><div class="stamp-name">マリンライナー<br>岡山→高松</div><span class="stamp-badge">未乗車</span></div>
     <div class="stamp-item" onclick="toggleStamp(this)"><span class="stamp-emoji">🌿</span><div class="stamp-name">特急南風<br>岡山→高知</div><span class="stamp-badge">未乗車</span></div>
-    <div class="stamp-item" onclick="toggleStamp(this)"><span class="stamp-emoji">🌅</span><div class="stamp-name">夜明けのものがたり<br>高知→窪川</div><span class="stamp-badge">未乗車</span></div>
-    <div class="stamp-item" onclick="toggleStamp(this)"><span class="stamp-emoji">🚌</span><div class="stamp-name">送迎バス<br>高松→休暇村</div><span class="stamp-badge">未乗車</span></div>
+    <div class="stamp-item" onclick="toggleStamp(this)"><span class="stamp-emoji">🚃</span><div class="stamp-name">特急しまんと<br>高知→多度津</div><span class="stamp-badge">未乗車</span></div>
+    <div class="stamp-item" onclick="toggleStamp(this)"><span class="stamp-emoji">🚕</span><div class="stamp-name">タクシー<br>鬼無駅→休暇村</div><span class="stamp-badge">未乗車</span></div>
     <div class="stamp-item" onclick="toggleStamp(this)"><span class="stamp-emoji">🍜</span><div class="stamp-name">普通列車<br>高松→丸亀</div><span class="stamp-badge">未乗車</span></div>
     <div class="stamp-item" onclick="toggleStamp(this)"><span class="stamp-emoji">🐟</span><div class="stamp-name">アンパンマントロッコ<br>高松→岡山</div><span class="stamp-badge">未乗車</span></div>
     <div class="stamp-item" onclick="toggleStamp(this)"><span class="stamp-emoji">🚄</span><div class="stamp-name">新幹線<br>岡山→埼玉</div><span class="stamp-badge">未乗車</span></div>
   </div>
   <div class="prog-wrap"><div class="prog-bar" id="stampProg" style="width:0%"></div></div>
-  <p class="prog-label" id="stampLabel">0 / 8 乗車済み</p>
+  <p class="prog-label" id="stampLabel">0 / 7 乗車済み</p>
 </div>
 
 <!-- ミッション -->
@@ -329,7 +386,7 @@ textarea:focus{outline:none;border-color:var(--teal);}
   <div class="card" id="missionList">
     <div class="mission-row" onclick="toggleMission(this)"><div class="m-check"></div><span class="m-text">仁淀川で石をスキップさせる</span><span class="m-who" style="background:var(--teal-light);color:var(--teal);">子供</span></div>
     <div class="mission-row" onclick="toggleMission(this)"><div class="m-check"></div><span class="m-text">かつおのたたきを食べる</span><span class="m-who" style="background:var(--amber-light);color:var(--amber);">全員</span></div>
-    <div class="mission-row" onclick="toggleMission(this)"><div class="m-check"></div><span class="m-text">夜明けのものがたりで車内食を楽しむ</span><span class="m-who" style="background:var(--amber-light);color:var(--amber);">全員</span></div>
+    <div class="mission-row" onclick="toggleMission(this)"><div class="m-check"></div><span class="m-text">休暇村讃岐から瀬戸大橋を見る</span><span class="m-who" style="background:var(--amber-light);color:var(--amber);">全員</span></div>
     <div class="mission-row" onclick="toggleMission(this)"><div class="m-check"></div><span class="m-text">瀬戸大橋を電車で渡る</span><span class="m-who" style="background:var(--teal-light);color:var(--teal);">子供</span></div>
     <div class="mission-row" onclick="toggleMission(this)"><div class="m-check"></div><span class="m-text">レオマのスライダーに乗る</span><span class="m-who" style="background:var(--teal-light);color:var(--teal);">子供</span></div>
     <div class="mission-row" onclick="toggleMission(this)"><div class="m-check"></div><span class="m-text">アンパンマンと写真を撮る</span><span class="m-who" style="background:var(--teal-light);color:var(--teal);">子供</span></div>
@@ -386,7 +443,7 @@ textarea:focus{outline:none;border-color:var(--teal);}
   <div class="card">
     <div class="budget-row"><span class="budget-cat">新幹線（往復・4人）</span><span class="budget-plan">予算 ¥80,000</span><input type="number" placeholder="実績" oninput="updateBudget()" id="b0"></div>
     <div class="budget-row"><span class="budget-cat">四国内 電車代</span><span class="budget-plan">予算 ¥32,000</span><input type="number" placeholder="実績" oninput="updateBudget()" id="b1"></div>
-    <div class="budget-row"><span class="budget-cat">夜明けのものがたり</span><span class="budget-plan">予算 ¥16,000</span><input type="number" placeholder="実績" oninput="updateBudget()" id="b2"></div>
+    <div class="budget-row"><span class="budget-cat">タクシー代（鬼無駅→休暇村等）</span><span class="budget-plan">予算 ¥15,000</span><input type="number" placeholder="実績" oninput="updateBudget()" id="b2"></div>
     <div class="budget-row"><span class="budget-cat">ホテル3泊</span><span class="budget-plan">予算 ¥90,000</span><input type="number" placeholder="実績" oninput="updateBudget()" id="b3"></div>
     <div class="budget-row"><span class="budget-cat">レオマウォーターランド</span><span class="budget-plan">予算 ¥16,000</span><input type="number" placeholder="実績" oninput="updateBudget()" id="b4"></div>
     <div class="budget-row"><span class="budget-cat">食事・おやつ</span><span class="budget-plan">予算 ¥30,000</span><input type="number" placeholder="実績" oninput="updateBudget()" id="b5"></div>
@@ -427,7 +484,7 @@ textarea:focus{outline:none;border-color:var(--teal);}
   <div class="album-grid">
     <div class="album-cell" onclick="editMemo(this,'1日目：仁淀川')">📷<span class="album-day-label">1日目：仁淀川</span></div>
     <div class="album-cell" onclick="editMemo(this,'1日目：三井家')">🏠<span class="album-day-label">1日目：三井家</span></div>
-    <div class="album-cell" onclick="editMemo(this,'2日目：夜明けのものがたり')">🌅<span class="album-day-label">2日目：夜明けのものがたり</span></div>
+    <div class="album-cell" onclick="editMemo(this,'2日目：鬼無・休暇村讃岐')">🏔️<span class="album-day-label">2日目：休暇村讃岐</span></div>
     <div class="album-cell" onclick="editMemo(this,'2日目：休暇村讃岐')">🏔️<span class="album-day-label">2日目：休暇村讃岐</span></div>
     <div class="album-cell" onclick="editMemo(this,'3日目：レオマプール')">🏊<span class="album-day-label">3日目：レオマプール</span></div>
     <div class="album-cell" onclick="editMemo(this,'3日目：森の湯温泉')">♨️<span class="album-day-label">3日目：森の湯温泉</span></div>
@@ -490,7 +547,7 @@ function updateBudget(){
   else if(diff<0){el.textContent='¥'+Math.abs(diff).toLocaleString()+' 節約！';el.style.color='var(--teal)';}
   else{el.textContent='ぴったり！';el.style.color='var(--teal)';}
 }
-const options=['仁淀川の清流遊び','夜明けのものがたり','レオマのプール','アンパンマントロッコ','休暇村讃岐の夕食','三井家での一棟貸し'];
+const options=['仁淀川の清流遊び','休暇村讃岐の温泉','レオマのプール','アンパンマントロッコ','休暇村讃岐の夕食','三井家での一棟貸し'];
 const voters=['voteA','voteB','voteC','voteD'];
 const votes={};
 voters.forEach(v=>{
