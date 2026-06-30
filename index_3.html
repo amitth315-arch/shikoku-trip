@@ -102,7 +102,7 @@
   h1.title .accent{ color:var(--neon); }
   h1.title .en{
     display:block; font-family:'Archivo', sans-serif; font-weight:500; text-transform:none;
-    font-size:clamp(13px, 1.4vw, 16px); letter-spacing:.3em; color:var(--cream); opacity:.5; margin-top:22px;
+    font-size:clamp(12px, 1.3vw, 15px); letter-spacing:.14em; line-height:1.8; color:var(--cream); opacity:.55; margin-top:30px;
   }
   .hero-sub{
     margin-top:26px; font-size:13.5px; letter-spacing:.04em; opacity:.62; max-width:340px; line-height:2;
@@ -200,38 +200,61 @@
     animation: spin 18s linear infinite;
   }
   .disco-grid:hover .disc{ animation-play-state:paused; }
+  .disco-grid:hover .disc--playable::before{ animation-play-state:paused; }
   .disc::after{ content:''; width:16%; aspect-ratio:1/1; background:var(--night); border-radius:50%; border:1px solid var(--line); }
   @keyframes spin{ to{ transform:rotate(360deg); } }
   .disc-cap{ text-align:center; margin-top:18px; }
   .disc-cap .t{ font-family:'Shippori Mincho', serif; font-size:15px; }
   .disc-cap .y{ font-size:11px; opacity:.5; margin-top:4px; letter-spacing:.1em; }
   @media(max-width:700px){ .disco-grid{ grid-template-columns:1fr; gap:50px; } .disc{ max-width:220px; margin-inline:auto;} }
-
-  /* ---------- GOODS ---------- */
-  .goods{ border-top:1px solid var(--line); }
-  .goods-grid{ display:grid; grid-template-columns:1fr 1fr; gap:2px; background:var(--line); border:1px solid var(--line); }
-  .goods-item{
-    background:var(--night); padding:50px 40px 40px; display:flex; flex-direction:column; align-items:center;
-    text-align:center; transition:background .4s;
+  .disc--playable{ cursor:pointer; }
+  .disc--playable::before{
+    content:''; position:absolute; top:50%; left:53%; transform:translate(-50%,-50%);
+    width:0; height:0; border-style:solid; border-width:9px 0 9px 14px;
+    border-color:transparent transparent transparent var(--cream);
+    z-index:2; opacity:.9; pointer-events:none; filter:drop-shadow(0 0 6px rgba(0,0,0,.4));
+    animation: counter-spin 18s linear infinite;
   }
-  .goods-item:hover{ background:var(--night2); }
+  @keyframes counter-spin{ to{ transform:translate(-50%,-50%) rotate(-360deg); } }
+  .disc--playable.playing::before{
+    border-style:none; width:5px; height:18px; background:var(--cream);
+    box-shadow:9px 0 0 var(--cream); left:50%;
+    animation-duration:2.6s;
+  }
+  .disc--playable.playing{ animation-duration:2.6s; box-shadow:0 0 0 3px var(--neon-soft); }
+  .disc-cap .y.now-playing{ color:var(--neon); }
+
+  /* ---------- GOODS : white product-card style ---------- */
+  .goods{ border-top:1px solid var(--line); }
+  .goods-grid{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:18px; }
+  .goods-item{
+    background:var(--cream); border-radius:4px; overflow:hidden;
+    display:flex; flex-direction:column; transition:transform .35s ease;
+  }
+  .goods-item:hover{ transform:translateY(-4px); }
   .goods-visual{
-    width:100%; max-width:260px; aspect-ratio:1/1; display:flex; align-items:center; justify-content:center;
-    margin-bottom:30px;
+    width:100%; aspect-ratio:1/1; display:flex; align-items:center; justify-content:center;
+    background:var(--cream); padding:18px; box-sizing:border-box;
   }
   .goods-visual svg{ width:100%; height:100%; }
-  .g-tag{ font-size:10.5px; letter-spacing:.25em; color:var(--amber); margin-bottom:10px; text-transform:uppercase; }
-  .g-name{ font-family:'Shippori Mincho', serif; font-size:22px; margin-bottom:10px; }
-  .g-desc{ font-size:13px; opacity:.65; line-height:1.9; max-width:300px; margin-bottom:20px; }
-  .g-price{ font-family:'Archivo', sans-serif; font-size:16px; letter-spacing:.05em; margin-bottom:22px; }
-  .g-price .note{ font-size:11px; opacity:.5; margin-left:8px; }
-  .g-btn{
-    font-family:'Archivo', sans-serif; font-size:11px; letter-spacing:.2em; text-transform:uppercase;
-    color:var(--cream); text-decoration:none; border:1px solid var(--line); padding:13px 32px; border-radius:99px;
-    transition:.3s;
+  .goods-caption{
+    background:#0c0a14; padding:20px 18px 26px; text-align:center;
   }
-  .g-btn:hover{ border-color:var(--neon); color:var(--neon); box-shadow:0 0 20px var(--neon-soft); }
-  @media(max-width:760px){ .goods-grid{ grid-template-columns:1fr; } }
+  .g-tag{ font-size:10px; letter-spacing:.2em; color:var(--neon); margin-bottom:8px; text-transform:uppercase; }
+  .g-name{
+    font-family:'Archivo', sans-serif; font-weight:700; font-size:13px; letter-spacing:.12em;
+    text-transform:uppercase; color:var(--cream); margin-bottom:10px; line-height:1.6;
+  }
+  .g-price{ font-family:'Archivo', sans-serif; font-size:14px; letter-spacing:.04em; color:var(--cream); opacity:.85; margin-bottom:14px; }
+  .g-price .note{ font-size:10.5px; opacity:.6; margin-left:6px; }
+  .g-btn{
+    font-family:'Archivo', sans-serif; font-size:10.5px; letter-spacing:.18em; text-transform:uppercase;
+    color:var(--cream); text-decoration:none; opacity:.55; border-bottom:1px solid transparent;
+    transition:.3s; padding-bottom:2px;
+  }
+  .g-btn:hover{ opacity:1; color:var(--neon); border-color:var(--neon); }
+  @media(max-width:900px){ .goods-grid{ grid-template-columns:1fr 1fr; } }
+  @media(max-width:560px){ .goods-grid{ grid-template-columns:1fr; } }
 
   /* ---------- CONTACT / FOOT ---------- */
   .contact{ border-top:1px solid var(--line); text-align:center; }
@@ -313,11 +336,11 @@
     </div>
     <div class="member" data-mark="02">
       <div class="m-role">BASS</div>
-      <div class="m-name">灯 -akari- <span class="kana">Bass</span></div>
+      <div class="m-name">歩斗 -ayuto- <span class="kana">Bass</span></div>
       <p class="m-desc">低音で道の奥行きを作る、もう一人の案内人。派手なソロより"良いベースライン"を黙々と探すタイプ。コーヒーよりウーロン茶派で、機材より靴選びにこだわりがある。</p>
       <div class="m-gear">
         <span>好きな時間帯：始発前</span>
-        <span>担当：灯りを残す人</span>
+        <span>担当：歩く速度を決める人</span>
         <span>影響を受けたもの：90'sロック、商店街の匂い</span>
       </div>
     </div>
@@ -346,8 +369,8 @@
   <h2>音源</h2>
   <div class="disco-grid">
     <div>
-      <div class="disc"></div>
-      <div class="disc-cap"><div class="t">1st Demo</div><div class="y">準備中</div></div>
+      <div class="disc disc--playable" id="demo-disc" onclick="toggleDemo(this)"></div>
+      <div class="disc-cap"><div class="t">1st Demo</div><div class="y" id="demo-status">クリックで再生</div></div>
     </div>
     <div>
       <div class="disc"></div>
@@ -368,50 +391,126 @@
     <div class="goods-item">
       <div class="goods-visual">
         <svg viewBox="0 0 240 200" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="capCrown" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#2a2440"/>
+              <stop offset="45%" stop-color="#181530"/>
+              <stop offset="100%" stop-color="#0c0a18"/>
+            </linearGradient>
+            <linearGradient id="capBrim" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#1c1932"/>
+              <stop offset="100%" stop-color="#08070f"/>
+            </linearGradient>
+            <radialGradient id="capSheen" cx="35%" cy="25%" r="70%">
+              <stop offset="0%" stop-color="#ffffff" stop-opacity="0.16"/>
+              <stop offset="60%" stop-color="#ffffff" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
           <!-- cap crown -->
-          <path d="M40 120 C40 70 75 40 120 40 C165 40 200 70 200 120 L200 128 L40 128 Z" fill="#1b1930" stroke="#f4ecdf22" stroke-width="2"/>
+          <path d="M40 120 C40 70 75 40 120 40 C165 40 200 70 200 120 L200 128 L40 128 Z" fill="url(#capCrown)" stroke="#000" stroke-width="1"/>
+          <path d="M40 120 C40 70 75 40 120 40 C165 40 200 70 200 120 L200 128 L40 128 Z" fill="url(#capSheen)"/>
           <!-- panel seams -->
-          <path d="M120 40 L120 128" stroke="#f4ecdf22" stroke-width="1.5"/>
-          <path d="M78 48 C70 70 66 100 68 128" stroke="#f4ecdf22" stroke-width="1.5" fill="none"/>
-          <path d="M162 48 C170 70 174 100 172 128" stroke="#f4ecdf22" stroke-width="1.5" fill="none"/>
+          <path d="M120 41 L120 128" stroke="#000" stroke-width="1.5" opacity="0.55"/>
+          <path d="M78 48 C70 70 66 100 68 128" stroke="#000" stroke-width="1.5" fill="none" opacity="0.4"/>
+          <path d="M162 48 C170 70 174 100 172 128" stroke="#000" stroke-width="1.5" fill="none" opacity="0.4"/>
+          <!-- stitching detail -->
+          <path d="M40 120 C40 70 75 40 120 40 C165 40 200 70 200 120" fill="none" stroke="#f4ecdf" stroke-width="0.8" stroke-dasharray="3 3" opacity="0.25"/>
           <!-- brim -->
-          <path d="M30 128 C30 120 35 116 45 116 L195 116 C205 116 210 120 210 128 C210 140 195 148 120 148 C45 148 30 140 30 128 Z" fill="#15132a" stroke="#f4ecdf22" stroke-width="2"/>
+          <path d="M30 128 C30 120 35 116 45 116 L195 116 C205 116 210 120 210 128 C210 142 195 151 120 151 C45 151 30 142 30 128 Z" fill="url(#capBrim)" stroke="#000" stroke-width="1"/>
+          <ellipse cx="120" cy="129" rx="90" ry="9" fill="#ffffff" opacity="0.04"/>
           <!-- button -->
-          <circle cx="120" cy="42" r="5" fill="#ff2e87"/>
-          <!-- logo patch -->
-          <circle cx="120" cy="92" r="22" fill="#11101c" stroke="#ff2e87" stroke-width="2"/>
-          <text x="120" y="89" text-anchor="middle" fill="#ff2e87" font-family="Archivo, sans-serif" font-size="9" font-weight="700" letter-spacing="1">HIMITSU</text>
-          <text x="120" y="100" text-anchor="middle" fill="#ffb04a" font-family="Archivo, sans-serif" font-size="8" letter-spacing="1">SPOT</text>
+          <circle cx="120" cy="42" r="4.5" fill="#15132a" stroke="#3a3454" stroke-width="1"/>
+          <!-- logo patch : embroidered stacked type -->
+          <rect x="84" y="74" width="72" height="40" rx="3" fill="#0c0a16" stroke="#3a3454" stroke-width="1.2"/>
+          <text x="120" y="88" text-anchor="middle" fill="#f4ecdf" font-family="Anton, sans-serif" font-size="11" letter-spacing="0.5">ANOKO</text>
+          <text x="120" y="99" text-anchor="middle" fill="#f4ecdf" font-family="Anton, sans-serif" font-size="11" letter-spacing="0.5">HIMITSU</text>
+          <text x="120" y="110" text-anchor="middle" fill="#ff2e87" font-family="Anton, sans-serif" font-size="12" letter-spacing="0.5">SPOT</text>
         </svg>
       </div>
-      <div class="g-tag">Headwear</div>
-      <div class="g-name">ロゴキャップ</div>
-      <p class="g-desc">フロントに小さな丸ワッペンロゴをあしらった、6パネルのベースボールキャップ。夜の街にも馴染むダークネイビー1色展開。</p>
-      <div class="g-price">¥4,500 <span class="note">税込 / フリーサイズ</span></div>
-      <a href="#contact" class="g-btn">問い合わせる</a>
+      <div class="goods-caption">
+        <div class="g-tag">Headwear</div>
+        <div class="g-name">ロゴキャップ</div>
+        <div class="g-price">¥4,500 <span class="note">税込 / フリーサイズ</span></div>
+        <a href="#contact" class="g-btn">問い合わせる</a>
+      </div>
     </div>
 
     <div class="goods-item">
       <div class="goods-visual">
         <svg viewBox="0 0 240 200" xmlns="http://www.w3.org/2000/svg">
-          <!-- tee body -->
-          <path d="M85 50 L60 65 L50 90 L70 100 L78 86 L78 170 L162 170 L162 86 L170 100 L190 90 L180 65 L155 50 C150 62 130 68 120 68 C110 68 90 62 85 50 Z"
-                fill="#15132a" stroke="#f4ecdf22" stroke-width="2"/>
-          <!-- collar -->
-          <path d="M104 52 C108 62 132 62 136 52" stroke="#f4ecdf33" stroke-width="2" fill="none"/>
-          <!-- door / keyhole print -->
-          <path d="M120 95 C100 95 92 112 92 130 L92 148 L148 148 L148 130 C148 112 140 95 120 95 Z"
-                fill="none" stroke="#ff2e87" stroke-width="2.5"/>
-          <circle cx="120" cy="118" r="6" fill="#ffb04a"/>
-          <rect x="117" y="122" width="6" height="14" fill="#ffb04a"/>
-          <text x="120" y="162" text-anchor="middle" fill="#f4ecdf" font-family="Archivo, sans-serif" font-size="8" letter-spacing="2" opacity="0.7">HIMITSU SPOT</text>
+          <defs>
+            <linearGradient id="teeBlackBody" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#2c2a36"/>
+              <stop offset="50%" stop-color="#16151c"/>
+              <stop offset="100%" stop-color="#0a090d"/>
+            </linearGradient>
+            <radialGradient id="teeBlackSheen" cx="38%" cy="20%" r="75%">
+              <stop offset="0%" stop-color="#ffffff" stop-opacity="0.10"/>
+              <stop offset="55%" stop-color="#ffffff" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <!-- tee body, flat-lay style -->
+          <path d="M85 50 L60 65 L48 92 L70 102 L78 86 L78 172 L162 172 L162 86 L170 102 L192 92 L180 65 L155 50 C150 64 130 70 120 70 C110 70 90 64 85 50 Z"
+                fill="url(#teeBlackBody)" stroke="#000" stroke-width="1.4"/>
+          <path d="M85 50 L60 65 L48 92 L70 102 L78 86 L78 172 L162 172 L162 86 L170 102 L192 92 L180 65 L155 50 C150 64 130 70 120 70 C110 70 90 64 85 50 Z"
+                fill="url(#teeBlackSheen)"/>
+          <!-- fold shadows -->
+          <path d="M96 90 C100 120 100 150 94 172" stroke="#000" stroke-width="6" opacity="0.18" fill="none" stroke-linecap="round"/>
+          <path d="M144 90 C140 120 140 150 146 172" stroke="#000" stroke-width="6" opacity="0.18" fill="none" stroke-linecap="round"/>
+          <!-- collar rib -->
+          <path d="M103 51 C108 64 132 64 137 51" stroke="#000" stroke-width="3.5" fill="none" opacity="0.5"/>
+          <path d="M103 51 C108 64 132 64 137 51" stroke="#3a3838" stroke-width="1.4" fill="none"/>
+          <!-- chest print : stacked poster type -->
+          <text x="120" y="106" text-anchor="middle" fill="#f4ecdf" font-family="Anton, sans-serif" font-size="16" letter-spacing="0.5">ANOKO</text>
+          <text x="120" y="123" text-anchor="middle" fill="#f4ecdf" font-family="Anton, sans-serif" font-size="16" letter-spacing="0.5">HIMITSU</text>
+          <text x="120" y="144" text-anchor="middle" fill="#ff2e87" font-family="Anton, sans-serif" font-size="19" letter-spacing="0.5">SPOT</text>
         </svg>
       </div>
-      <div class="g-tag">Apparel</div>
-      <div class="g-name">バンドTシャツ</div>
-      <p class="g-desc">背中に小さな"扉"のグラフィックを配したバンドTシャツ。生地はゆったりめのボックスシルエットで男女問わず着られます。</p>
-      <div class="g-price">¥3,800 <span class="note">税込 / S・M・L</span></div>
-      <a href="#contact" class="g-btn">問い合わせる</a>
+      <div class="goods-caption">
+        <div class="g-tag">Apparel — Black</div>
+        <div class="g-name">バンドTシャツ（ブラック）</div>
+        <div class="g-price">¥3,800 <span class="note">税込 / S・M・L</span></div>
+        <a href="#contact" class="g-btn">問い合わせる</a>
+      </div>
+    </div>
+
+    <div class="goods-item">
+      <div class="goods-visual">
+        <svg viewBox="0 0 240 200" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="teeWhiteBody" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#fdfbf6"/>
+              <stop offset="50%" stop-color="#e9e4d8"/>
+              <stop offset="100%" stop-color="#d8d2c2"/>
+            </linearGradient>
+            <radialGradient id="teeWhiteSheen" cx="38%" cy="20%" r="75%">
+              <stop offset="0%" stop-color="#ffffff" stop-opacity="0.55"/>
+              <stop offset="55%" stop-color="#ffffff" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <!-- tee body, flat-lay style -->
+          <path d="M85 50 L60 65 L48 92 L70 102 L78 86 L78 172 L162 172 L162 86 L170 102 L192 92 L180 65 L155 50 C150 64 130 70 120 70 C110 70 90 64 85 50 Z"
+                fill="url(#teeWhiteBody)" stroke="#8c8369" stroke-width="1.6"/>
+          <path d="M85 50 L60 65 L48 92 L70 102 L78 86 L78 172 L162 172 L162 86 L170 102 L192 92 L180 65 L155 50 C150 64 130 70 120 70 C110 70 90 64 85 50 Z"
+                fill="url(#teeWhiteSheen)"/>
+          <!-- fold shadows -->
+          <path d="M96 90 C100 120 100 150 94 172" stroke="#000" stroke-width="6" opacity="0.07" fill="none" stroke-linecap="round"/>
+          <path d="M144 90 C140 120 140 150 146 172" stroke="#000" stroke-width="6" opacity="0.07" fill="none" stroke-linecap="round"/>
+          <!-- collar rib -->
+          <path d="M103 51 C108 64 132 64 137 51" stroke="#b8af9b" stroke-width="3.5" fill="none" opacity="0.7"/>
+          <path d="M103 51 C108 64 132 64 137 51" stroke="#cfc7b3" stroke-width="1.4" fill="none"/>
+          <!-- chest print : stacked poster type -->
+          <text x="120" y="106" text-anchor="middle" fill="#15131f" font-family="Anton, sans-serif" font-size="16" letter-spacing="0.5">ANOKO</text>
+          <text x="120" y="123" text-anchor="middle" fill="#15131f" font-family="Anton, sans-serif" font-size="16" letter-spacing="0.5">HIMITSU</text>
+          <text x="120" y="144" text-anchor="middle" fill="#ff2e87" font-family="Anton, sans-serif" font-size="19" letter-spacing="0.5">SPOT</text>
+        </svg>
+      </div>
+      <div class="goods-caption">
+        <div class="g-tag">Apparel — White</div>
+        <div class="g-name">バンドTシャツ（ホワイト）</div>
+        <div class="g-price">¥3,800 <span class="note">税込 / S・M・L</span></div>
+        <a href="#contact" class="g-btn">問い合わせる</a>
+      </div>
     </div>
 
   </div>
@@ -432,6 +531,75 @@
 <footer>
   © あの娘HIMITSUスポット — Fan-made unofficial site mockup
 </footer>
+
+<script>
+  // 1st Demo クリック再生：Web Audio API でその場生成する自作フレーズ（著作権フリー）
+  let audioCtx = null;
+  let demoTimer = null;
+  let demoPlaying = false;
+
+  function ensureCtx(){
+    if(!audioCtx){ audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }
+    return audioCtx;
+  }
+
+  function playNote(freq, time, dur, type, gainVal){
+    const ctx = ensureCtx();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = type;
+    osc.frequency.value = freq;
+    gain.gain.setValueAtTime(0.0001, time);
+    gain.gain.linearRampToValueAtTime(gainVal, time + 0.02);
+    gain.gain.exponentialRampToValueAtTime(0.0001, time + dur);
+    osc.connect(gain).connect(ctx.destination);
+    osc.start(time);
+    osc.stop(time + dur + 0.05);
+  }
+
+  // シンプルなナイトポップ風アルペジオ（4拍×2小節）
+  const demoPattern = [
+    [220.00, 0.0, 0.34, 'triangle', 0.16],
+    [277.18, 0.4, 0.34, 'triangle', 0.16],
+    [329.63, 0.8, 0.34, 'triangle', 0.16],
+    [277.18, 1.2, 0.34, 'triangle', 0.16],
+    [246.94, 1.7, 0.34, 'triangle', 0.16],
+    [293.66, 2.1, 0.34, 'triangle', 0.16],
+    [349.23, 2.5, 0.34, 'triangle', 0.16],
+    [293.66, 2.9, 0.34, 'triangle', 0.16],
+  ];
+  const loopLength = 3.4;
+
+  function scheduleLoop(){
+    const ctx = ensureCtx();
+    const start = ctx.currentTime + 0.05;
+    demoPattern.forEach(([freq, offset, dur, type, gainVal]) => {
+      playNote(freq, start + offset, dur, type, gainVal);
+      playNote(freq / 2, start + offset, dur * 1.1, 'sine', gainVal * 0.7); // ベース
+    });
+  }
+
+  function toggleDemo(el){
+    const ctx = ensureCtx();
+    if(ctx.state === 'suspended'){ ctx.resume(); }
+    const status = document.getElementById('demo-status');
+    if(demoPlaying){
+      clearInterval(demoTimer);
+      demoTimer = null;
+      demoPlaying = false;
+      el.classList.remove('playing');
+      status.textContent = 'クリックで再生';
+      status.classList.remove('now-playing');
+    } else {
+      scheduleLoop();
+      demoTimer = setInterval(scheduleLoop, loopLength * 1000);
+      demoPlaying = true;
+      el.classList.add('playing');
+      status.textContent = '♪ Now Playing';
+      status.classList.add('now-playing');
+    }
+  }
+</script>
 
 </body>
 </html>
